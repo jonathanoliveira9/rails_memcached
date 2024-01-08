@@ -3,9 +3,15 @@
     <td>Name</td>
     <td>Description</td>
   </tr>
-  <% @products.each do |product| %>
-    <% cache [product, "v1"], expires_in: 1.hour do %>
-      <%= render partial: "product", locals: { product: product } %>
+  <% @products.each_with_index do |product, index| %>
+    <% cache [product, "v2"], expires_in: 1.hour do %>
+      <%= render partial: "product", locals: { product: product, position: (index + 1) } %>
     <% end %>
   <% end %>
 </table>
+
+<style>
+  table, th, td {
+  border: 1px solid black;
+}
+</style>

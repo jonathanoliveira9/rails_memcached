@@ -7,5 +7,6 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 100.times do |t|
+  puts "Creating Product: #{ 1 + t }"
   Product.create(name: Faker::Name.name, description: Faker::Markdown.emphasis)
 end
