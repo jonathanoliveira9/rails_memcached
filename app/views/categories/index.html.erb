@@ -1,0 +1,15 @@
+<% @categories.each do |category| %>
+  <% cache category do %>
+    <h2><%= category.name %></h2>
+    <% category.subcategories.each do |subcategory| %>
+      <% cache subcategory do %>
+        <h3><%= subcategory.name %> </h3>
+        <% subcategory.products.each_with_index do |product, index| %>
+          <% cache product do %>
+            <%= render partial: "product", locals: { product: product, position: (index + 1) } %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
