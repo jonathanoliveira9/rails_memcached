@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_17_174701) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_17_180514) do
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -22,12 +22,18 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_17_174701) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "subcategory_id"
+    t.index ["subcategory_id"], name: "index_products_on_subcategory_id"
   end
 
   create_table "subcategories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "category_id"
+    t.index ["category_id"], name: "index_subcategories_on_category_id"
   end
 
+  add_foreign_key "products", "subcategories"
+  add_foreign_key "subcategories", "categories"
 end
